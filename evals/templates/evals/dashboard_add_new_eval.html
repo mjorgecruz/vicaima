@@ -1,0 +1,13 @@
+<html>
+
+	<h1>This is my dashboard for the admin</h1>
+
+	# create new evaluation
+	<form method="post">
+		{% csrf_token %}
+		{{ newevalform.as_p }}
+		<button type="submit">Add entry</button>
+
+	# view evaluations
+
+</html>

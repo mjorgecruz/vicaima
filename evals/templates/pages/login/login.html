@@ -140,12 +140,12 @@ button{
     </div>
     <form method="post">
         <h3>Login</h3>
-
+        {% csrf_token %}
         <label for="username">Username</label>
-        <input type="text" placeholder="Email or Phone" id="username">
+        <input type="text" placeholder="user" id="user" name="username">
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="password" id="password" name="password">
 
         <button>Log In</button>
         </div>
