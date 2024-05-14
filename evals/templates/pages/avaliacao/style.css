@@ -1,0 +1,222 @@
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+  }
+  
+  p {
+    margin-bottom: 0.5rem;
+  }
+  
+  label {
+    display: inline-block;
+    width: 120px;
+    margin-right: 1rem;
+    text-align: right;
+  }
+  
+  input[type="radio"] {
+    margin-right: 1rem;
+  }
+  
+  textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45A049;
+  }
+  
+  .line1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+
+  .line2{
+    width: 100%;
+    display: flex;
+    justify-content:space-between
+
+  }
+
+  .name {
+    width: 60vw;
+  }
+  .adm_date {
+    width: 40vw;
+  }
+  .funcao {
+    width: 60vw;
+  }
+  .grupo {
+    width: 40vw;
+  }
+
+  .faltas {
+    padding-left: 20px ;
+  }
+
+  .caption {
+    text-align: left;
+} */
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 2rem;
+  }
+  
+  form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .line {
+    margin-bottom: 1rem;
+  }
+  
+  .line1, .line2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    margin-right: 0.5rem;
+    color: #555;
+  }
+  
+  input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45A049;
+  }
+  
+  .faltas, .criterio {
+    margin-bottom: 1.5rem;
+  }
+  
+  h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .caption {
+    margin-bottom: 0.5rem;
+    color: #777;
+  }
+
+    .name {
+    width: 60vw;
+  }
+  .adm_date {
+    width: 40vw;
+  }
+  .funcao {
+    width: 60vw;
+  }
+  .grupo {
+    width: 40vw;
+  }
+
+  .assiduidade {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+
+  }
+
+  .resp {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .disponibilidade {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .conhecimento {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .produtividade 
