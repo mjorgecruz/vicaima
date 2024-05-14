@@ -10,4 +10,4 @@ class NewLogin(ModelForm):
 class NewLogin(ModelForm):
     class Meta:
         model = Login
-        fields = ['user','password','permission', 'employee_id']
+        fields = ['username','password','permission', 'employee_id']

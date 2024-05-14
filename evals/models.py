@@ -11,10 +11,10 @@ class Colaboradores(models.Model):
 	def __str__(self):
 		return self.name
 	
-class Correlacoes(models.Model):
-	colaborador_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
-	evaluator_id = models.ForeignKey(Colaboradores.colaborador_id, on_delete=models.CASCADE)
-	director_id = models.ForeignKey(Colaboradores.colaborador_id, on_delete=models.CASCADE)
+# class Correlacoes(models.Model):
+# 	colaborador_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
+# 	evaluator_id = models.ForeignKey(Colaboradores.colaborador_id, on_delete=models.CASCADE)
+# 	director_id = models.ForeignKey(Colaboradores.colaborador_id, on_delete=models.CASCADE)
 
 class Eventos(models.Model):
 	creation_date = models.DateField()
@@ -41,7 +41,7 @@ class Questions(models.Model):
 	eval = models.IntegerField()
 
 class Login(models.Model):
-	user = models.CharField(max_length=100)
+	username = models.CharField(max_length=100)
 	password = models.CharField(max_length=100)
 	permission = models.IntegerField()
 	employee_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
