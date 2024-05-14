@@ -1,7 +1,6 @@
 from django.db import models
 
 class Colaboradores(models.Model):
-	colaborador_id = models.IntegerField()
 	name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	department = models.CharField(max_length=100)
@@ -19,7 +18,7 @@ class Colaboradores(models.Model):
 class Eventos(models.Model):
 	creation_date = models.DateField()
 	evaluator_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
-
+	evaluation_status = models.BooleanField(default=False)
 class Resultados(models.Model):
 	result = models.IntegerField()
 	classification = models.CharField(max_length=1)

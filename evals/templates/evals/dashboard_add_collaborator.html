@@ -1,0 +1,10 @@
+<html>
+	<h1>Add Collaborator</h1>
+	<form method="post">
+		{% csrf_token %}
+		{{ newuserform.as_p }}
+		<button type="submit">Add entry</button>
+	</form>
+
+
+</html>

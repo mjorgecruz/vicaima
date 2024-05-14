@@ -1,33 +1,57 @@
-from django.shortcuts import render
-from .models import *
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
+from .forms import CreateUserForm, LoginForm, NewUserForm
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login, logout
 
-def home(request):
-    return render(request, 'main/home.html')
 
-def addLogin(request):
+def homepage(request):
+    return render(request, "evals/index.html")
+
+def register(request):
+
+    form = CreateUserForm()
+
     if request.method == 'POST':
-        form = (request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # redirect to login page after successful registration
+            return redirect('my-login')
+    context = {'registerform': form}
+    return render(request, "evals/register.html", context=context)
+
+def my_login(request):
+    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            is_staff = request.POST.get('is_staff')
+            user = authenticate(request, username=username, password=password, is_staff=is_staff)
+            if user is not None:
+                auth.login(request, user)
+                if user.is_staff == True:
+                    return redirect('dashboard_admin')
+                else:
+                    return redirect('dashboard_user')
+    context = {'loginform':form}
+    return render(request, "evals/my-login.html", context=context)
+
+def dashboard_admin(request):
+    return render(request, "evals/dashboard_admin.html")
+
+def dashboard_user(request):
+    return render(request, "evals/dashboard_user.html")
+
+def dashboard_add_collaborator(request):
+    form = NewUserForm()
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            return redirect('dashboard_admin')
     else:
         form = NewUserForm()
-    return render(request, 'main/login.html',  {'form': form})
+    context = {'newuserform': form}
+    return render(request, "evals/dashboard_add_collaborator.html", context=context)
 
-def loginView(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('evals/index')  # replace 'home' with your desired redirect
-        else:
-            return render(request, 'pages/login/login.html', {'error': 'Invalid username or password'})
-    else:
-        return render(request, 'pages/login/login.html')
