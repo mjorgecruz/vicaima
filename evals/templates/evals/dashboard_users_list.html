@@ -1,25 +1,31 @@
-<html>
-
-	<h1>This is my dashboard for the admin</h1>
-	
-	
-	#check list of users
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Last Name</th>
-		</tr>
-		{% for collaborator in collaborators %}
-		<tr>
-			<td>{{ collaborator.id }}</td>
-			<td>{{ collaborator.name }}</td>
-			<td>{{ collaborator.last_name }}</td>
-			<td>{{ collaborator.department}}</td>
-			<td>{{ collaborator.function}}</td>
-			<td>{{ collaborator.functional_group}}</td>
-		</tr>
-		{% endfor %}
-	</table>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users list</title>
+    <style> 
+    </style>
+</head>
+<body>
+    <h1>This is my dashboard for the admin</h1>
+    <!-- check list of users -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+        </tr>
+        {% for collaborator in collaborators %}
+        <tr>
+            <td>{{ collaborator.id }}</td>
+            <td>{{ collaborator.name }}</td>
+            <td>{{ collaborator.last_name }}</td>
+            <td>{{ collaborator.department}}</td>
+            <td>{{ collaborator.function}}</td>
+            <td>{{ collaborator.functional_group}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
 </html>

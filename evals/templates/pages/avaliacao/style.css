@@ -194,29 +194,9 @@ body {
     width: 40vw;
   }
 
-  .assiduidade {
+  .rectangle {
     background-color: rgba(119, 119, 119, 0.2);
     padding: 0.3rem 0.3rem 0.6rem 0.6rem;
     border-radius: 10px;
 
   }
-
-  .resp {
-    background-color: rgba(119, 119, 119, 0.2);
-    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
-    border-radius: 10px;
-  }
-
-  .disponibilidade {
-    background-color: rgba(119, 119, 119, 0.2);
-    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
-    border-radius: 10px;
-  }
-
-  .conhecimento {
-    background-color: rgba(119, 119, 119, 0.2);
-    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
-    border-radius: 10px;
-  }
-
-  .produtividade 
