@@ -1,33 +1,33 @@
 from django.shortcuts import render
 from .models import *
 from django.shortcuts import render, redirect
-from .forms import NewLogin
+from .forms import NewUserForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
-def index(request):
-	return render(request, "evals/index.html")
+def home(request):
+    return render(request, 'main/home.html')
 
 def addLogin(request):
     if request.method == 'POST':
-        form = NewLogin(request.POST)
+        form = (request.POST)
         if form.is_valid():
             form.save()
+            return redirect('login')  # redirect to login page after successful registration
     else:
-        form = NewLogin()
-
+        form = NewUserForm()
     return render(request, 'main/login.html',  {'form': form})
 
-def login_view(request):
+def loginView(request):
     if request.method == 'POST':
-        username = request.POST['username']  # use 'username' instead of 'user'
-        password = request.POST['password']
-        try:
-            user = Login.objects.get(username=username)
-            if user.check_password(password):
-                return user
-            else:
-                return None
-        except ObjectDoesNotExist:
-            return None
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('evals/index')  # replace 'home' with your desired redirect
+        else:
+            return render(request, 'pages/login/login.html', {'error': 'Invalid username or password'})
+    else:
+        return render(request, 'pages/login/login.html')
