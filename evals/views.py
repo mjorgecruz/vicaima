@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from .models import *
 from django.shortcuts import render, redirect
 from .forms import NewLogin, UploadFileForm
 from django.contrib.auth import authenticate, login
@@ -14,34 +12,44 @@ import csv
 import pandas as pd
 from datetime import datetime
 
+from .forms import CreateUserForm, LoginForm, NewUserForm
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login, logout
+from .models import Colaboradores
 
-def index(request):
-	return render(request, "evals/index.html")
 
-def addLogin(request):
+def homepage(request):
+    return render(request, "evals/index.html")
+
+def register(request):
+
+    form = CreateUserForm()
+
     if request.method == 'POST':
-        form = NewLogin(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-    else:
-        form = NewLogin()
+            return redirect('my-login')
+    context = {'registerform': form}
+    return render(request, "evals/register.html", context=context)
 
-    return render(request, 'main/login.html',  {'form': form})
-
-def login_view(request):
+def my_login(request):
+    form = LoginForm()
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        try:
-            user = Login.objects.get(username=username)
-        except Login.DoesNotExist:
-            return render(request, 'pages/login/login.html')
-        if password == user.password:
-            return redirect('/index')
-        else:
-            return render(request, 'pages/login/login.html')
-    else:
-        return render(request, 'pages/login/login.html')
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            is_staff = request.POST.get('is_staff')
+            user = authenticate(request, username=username, password=password, is_staff=is_staff)
+            if user is not None:
+                auth.login(request, user)
+                if user.is_staff == True:
+                    return redirect('dashboard_admin')
+                else:
+                    return redirect('dashboard_user')
+    context = {'loginform':form}
+    return render(request, "evals/my-login.html", context=context)
 
 def import_view(request):
     if request.method == "POST":
@@ -91,3 +99,37 @@ def import_view(request):
     else:
         form = UploadFileForm()
     return render(request, "pages/import/import.html", {'form': form})
+
+def dashboard_admin(request):
+    return render(request, "evals/dashboard_admin.html")
+
+def dashboard_user(request):
+    return render(request, "evals/dashboard_user.html")
+
+def dashboard_add_collaborator(request):
+    form = NewUserForm()
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            return redirect('dashboard_admin')
+    else:
+        form = NewUserForm()
+    context = {'newuserform': form}
+    return render(request, "evals/dashboard_add_collaborator.html", context=context)
+
+def dashboard_users_list(request):
+    collaborators = Colaboradores.objects.all()
+    return render(request, "evals/dashboard_users_list.html", {'collaborators': collaborators})
+
+def dashboard_add_event(request):
+    form = NewUserForm()
+    if request.method == 'POST':
+        form = (request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard_admin')
+    else:
+        form = NewUserForm()
+    context = {'newuserform': form}
+    return render(request, "evals/dashboard_add_collaborator.html", context=context)
