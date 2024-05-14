@@ -22,7 +22,18 @@ class LoginForm(AuthenticationForm):
 #add new user
 class NewUserForm(forms.ModelForm):
     model = Colaboradores
-    # colaborator_id = forms.AutoField()
+    name = forms.CharField(widget=TextInput())
+    last_name = forms.CharField(widget=TextInput())
+    department = forms.CharField(widget=TextInput())
+    function = forms.CharField(widget=TextInput())
+    admission_date = forms.DateField(widget=forms.SelectDateWidget)
+    functional_group = forms.CharField(widget=TextInput())
+    class Meta:
+        model = Colaboradores
+        fields = ['name', 'last_name', 'department', 'function', 'admission_date', 'functional_group']
+
+class NewUserForm(forms.ModelForm):
+    model = Colaboradores
     name = forms.CharField(widget=TextInput())
     last_name = forms.CharField(widget=TextInput())
     department = forms.CharField(widget=TextInput())

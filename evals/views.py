@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm, NewUserForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
+from .models import Colaboradores
 
 
 def homepage(request):
@@ -55,3 +56,18 @@ def dashboard_add_collaborator(request):
     context = {'newuserform': form}
     return render(request, "evals/dashboard_add_collaborator.html", context=context)
 
+def dashboard_users_list(request):
+    collaborators = Colaboradores.objects.all()
+    return render(request, "evals/dashboard_users_list.html", {'collaborators': collaborators})
+
+def dashboard_add_event(request):
+    form = NewUserForm()
+    if request.method == 'POST':
+        form = (request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard_admin')
+    else:
+        form = NewUserForm()
+    context = {'newuserform': form}
+    return render(request, "evals/dashboard_add_collaborator.html", context=context)
