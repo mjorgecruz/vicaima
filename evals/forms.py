@@ -1,12 +1,13 @@
 from django.forms import ModelForm
-from .models import Employee
+from .models import Colaboradores
+from .models import Login
 
-class NewEmployeeForm(ModelForm):
+class NewLogin(ModelForm):
     class Meta:
-        model = Employee
+        model = Login
         fields = '__all__'
-        
-class NewEmployeeForm(ModelForm):
+    
+class NewLogin(ModelForm):
     class Meta:
-        model = Employee
-        fields = ['name','email','phone','course']
+        model = Login
+        fields = ['user','password','permission', 'employee_id']

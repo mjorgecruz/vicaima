@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from .models import *
 from django.shortcuts import render, redirect
-from .models import Employee
+from .forms import NewLogin
 
 def index(request):
 	return render(request, "evals/index.html")
-# Create your views here.
 
-# def addEmployee(request):
-#     form = NewEmployeeForm
-#     context = {'form':form}
-#     return render(request, 'accounts/add-employee.html', context)
+def addLogin(request):
+    if request.method == 'POST':
+        form = NewLogin(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = NewLogin()
+
+    return render(request, 'main/login.html',  {'form': form})
