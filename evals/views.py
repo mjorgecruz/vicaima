@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from django.contrib import messages
+from django.contrib import messages, auth
 from .forms import UploadFileForm
 from .models import Login, Colaboradores
 from tablib import Dataset
@@ -13,18 +13,19 @@ import csv
 import pandas as pd
 from datetime import datetime
 from django.db import connection, transaction
-
-from .forms import CreateUserForm, LoginForm, NewUserForm
 from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAvaliadosForm
 from .models import Colaboradores, Eventos, Avaliados, Resultados
-
 from tablib import Dataset
 from datetime import datetime
 import csv
 import pandas as pd
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.shortcuts import render, redirect
+from .models import Login
+from django.contrib.auth.hashers import make_password
 
 def homepage(request):
     return render(request, "evals/index.html")
@@ -44,18 +45,18 @@ def register(request):
 def my_login(request):
     form = LoginForm()
     if request.method == 'POST':
-        form = LoginForm(request, data=request.POST)
-        if form.is_valid:
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
             is_staff = request.POST.get('is_staff')
-            user = authenticate(request, username=username, password=password, is_staff=is_staff)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                if user.is_staff == True:
+                if user.is_staff:
                     return redirect('dashboard_admin')
                 else:
-                    return redirect('dashboard_user')
+                   return redirect(reverse('user_page', args=[username])) 
     context = {'loginform':form}
     return render(request, "evals/my-login.html", context=context)
 
@@ -81,7 +82,7 @@ def import_view(request):
                 reader = csv.DictReader(StringIO(file_data))
                 for row in reader:
                     nickname = row['Nome'] + " " + row['Apelido']
-                    Colaboradores.objects.create(
+                    colaborador = Colaboradores.objects.create(
                         nickname=nickname,
                         name=row['Nome'],
                         last_name=row['Apelido'],
@@ -89,14 +90,21 @@ def import_view(request):
                         function=row['Funcao'],
                         admission_date=datetime.strptime(row['Data de Admissao'], '%d/%m/%Y').date(),
                         functional_group=row['Grupo Funcional:'],
-                        password=" "
+                        password="admin12345"
                     )
                     User.objects.create_user(  # Create a User instance
                         username=nickname,
-                        password="admin12345",
+                        password=make_password("admin12345"),
                         first_name=row['Nome'],
                         last_name=row['Apelido'],
-            )
+                    )
+                    Login.objects.create(  # Create a Login instance
+                        username=nickname,
+                        password=make_password("admin12345"),  # Hash the password before storing it
+                        permission=0,  # Set the permission level
+                        employee_id=colaborador  # Set the employee_id to the Colaboradores instance
+                    )
+
                 
     form = UploadFileForm()
     return render(request, "evals/import.html", {'form': form})
@@ -119,7 +127,13 @@ def dashboard_add_collaborator(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
-            form.save() 
+            colaborador = form.save()  # Save the form and get the Colaboradores instance
+            Login.objects.create(  # Create a Login instance
+                username=colaborador.nickname,
+                password=make_password(colaborador.password),  # Get the password from the form
+                permission=0,  # Set the permission level
+                employee_id=colaborador  # Set the employee_id to the Colaboradores instance
+            )
             return redirect('dashboard_admin')
     else:
         form = NewUserForm()
@@ -180,3 +194,11 @@ def delete_collaborator(request, collaborator_id):
 
 def eval_view(request):
     return render(request, "evals/eval_form.html")
+
+@login_required
+def user_page(request, username):
+    login = get_object_or_404(Login, username=username)
+    if request.user.username != login.username:
+        return redirect('my-login')  # Redirect to the admin dashboard if the user is not the owner of the page
+    # Render the user's page
+    return render(request, 'evals/user_page.html', {'login': login})

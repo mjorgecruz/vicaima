@@ -19,6 +19,7 @@ urlpatterns = [
 	path('delete_event/<int:event_id>/', views.delete_event, name='delete_event'),
 	path('delete_collaborator/<int:collaborator_id>/', views.delete_collaborator, name='delete_collaborator'),
 
-	path('', include('django.contrib.auth.urls'))
+	path('', include('django.contrib.auth.urls')),
+	path('user/<str:username>/', views.user_page, name='user_page'),
 ]
 

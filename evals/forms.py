@@ -17,10 +17,10 @@ class CreateUserForm(UserCreationForm):
 #authenticate user
 
 class LoginForm(AuthenticationForm):
-    class Meta:
-        model = User
-        username = forms.CharField(widget=TextInput)
-        password = forms.CharField(widget=PasswordInput())
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = TextInput(attrs={'class': 'form-control'})
+        self.fields['password'].widget = PasswordInput(attrs={'class': 'form-control'})
 
 #add new user
 class NewUserForm(forms.ModelForm):
@@ -32,9 +32,10 @@ class NewUserForm(forms.ModelForm):
     function = forms.CharField(widget=TextInput())
     admission_date = forms.DateField(widget=forms.SelectDateWidget)
     functional_group = forms.CharField(widget=TextInput())
+    password = forms.CharField(widget=PasswordInput())
     class Meta:
         model = Colaboradores
-        fields = ['name', 'last_name', 'department', 'function', 'admission_date', 'functional_group']
+        fields = ['name', 'last_name', 'department', 'function', 'admission_date', 'functional_group', 'nickname', 'password']
 
 class NewEventForm(forms.ModelForm):
     creation_date = forms.DateField(widget=forms.SelectDateWidget)
