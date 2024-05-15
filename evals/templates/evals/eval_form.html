@@ -5,17 +5,195 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Evaluation Form</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0rem;
+  }
+  
+  form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .line {
+    margin-bottom: 1rem;
+  }
+  
+  .line1, .line2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    margin-right: 0.5rem;
+    color: #555;
+  }
+  
+  input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  input[type="submit"] {
+    background-color: #07598f;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45A049;
+  }
+  
+  .faltas, .criterio {
+    margin-bottom: 1.5rem;
+  }
+  
+  h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .caption {
+    margin-bottom: 0.5rem;
+    color: #777;
+  }
+
+    .name {
+    width: 60vw;
+  }
+  .adm_date {
+    width: 40vw;
+  }
+  .funcao {
+    width: 60vw;
+  }
+  .grupo {
+    width: 40vw;
+  }
+
+  .assiduidade {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+
+  }
+
+  .resp {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .disponibilidade {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .conhecimento {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .produtividade {
+    background-color: rgba(119, 119, 119, 0.2);
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  nav p{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  *{
+    box-sizing: border-box;
+  }
+  
+  nav{
+    padding: 15px;
+    padding-inline: 25px;
+    width: 100%;
+    background-color: #ffffff;
+    height: 80px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+    margin-bottom: 3em;
+  }
+
+  .container {
+    height: 40em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+    background-color: #F8F9FA;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+  }
+  </style>
 </head>
 <body>
     <nav>
-        <div style="height: 100%; display:flex; justify-content:space-between;">
-            <img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
-        </div>
-    </nav> 	 
-    
-<form>
-    <h1>Evaluation Form</h1>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+			<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<p>Utilizadores</p>
+				<p>Avaliacoes</p>
+			</div>
+		</div>
+	</nav>  	 
+<h1>Evaluation Form</h1>
+<div class="container">   
+<!-- <form> -->
     <div class="inner_header">
         <div class="line">
             <div class="line1">
@@ -109,7 +287,8 @@
     <br>
     
     <input type="submit" value="Submit Evaluation">
-  </form>
+  <!-- </form> -->
+</div>
   <script src="index.js" charset="UTF-8"></script>
 </body>
 </html>

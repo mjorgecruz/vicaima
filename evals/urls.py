@@ -13,6 +13,7 @@ urlpatterns = [
 	path('import', views.import_view, name="import"),
 
 	path('dashboard_add_new_eval', views.dashboard_add_event, name='dashboard_add_new_eval'),
+	path('dashboard_add_edit_eval', views.eval_view, name='dashboard_add_new_eval'),
 	path('delete_event/<int:event_id>/', views.delete_event, name='delete_event'),
 	path('delete_collaborator/<int:collaborator_id>/', views.delete_collaborator, name='delete_collaborator'),
 

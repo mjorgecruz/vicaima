@@ -173,3 +173,5 @@ def delete_collaborator(request, collaborator_id):
     collaborator.delete()  # Delete the collaborator
     user.delete()  # Delete the User instance
     return redirect('dashboard_users_list')
+def eval_view(request):
+    return render(request, "evals/eval_form.html")
