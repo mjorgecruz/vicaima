@@ -12,7 +12,7 @@ urlpatterns = [
 	path('dashboard_users_list', views.dashboard_users_list, name='dashboard_users_list'),
 	path('dashboard_add_new_eval', views.dashboard_add_event, name='dashboard_add_new_eval'),
 	path('delete_event/<int:event_id>/', views.delete_event, name='delete_event'),
-	
+	path('delete_collaborator/<int:collaborator_id>/', views.delete_collaborator, name='delete_collaborator'),
 
 	path('', include('django.contrib.auth.urls'))
 ]

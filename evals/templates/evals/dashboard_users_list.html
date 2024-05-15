@@ -19,6 +19,12 @@
 			<td>{{ collaborator.department}}</td>
 			<td>{{ collaborator.function}}</td>
 			<td>{{ collaborator.functional_group}}</td>
+			<td>  <!-- New table cell for delete button -->
+            <form method="post" action="{% url 'delete_collaborator' collaborator.id %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
 		</tr>
 		{% endfor %}
 	</table>

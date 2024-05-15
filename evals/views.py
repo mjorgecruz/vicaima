@@ -100,3 +100,9 @@ def delete_event(request, event_id):
     event = get_object_or_404(Eventos, id=event_id)  # Get the event or return 404 if not found
     event.delete()  # Delete the event
     return redirect('dashboard_admin')  # Redirect to the admin dashboard
+
+@require_POST
+def delete_collaborator(request, collaborator_id):
+    event = get_object_or_404(Colaboradores, id=collaborator_id)  # Get the event or return 404 if not found
+    event.delete()  # Delete the event
+    return redirect('dashboard_users_list')  # Redirect to the admin dashboard
