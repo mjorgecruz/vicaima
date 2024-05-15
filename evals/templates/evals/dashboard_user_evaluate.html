@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluation Form</title>
+  <style>
+	
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0rem;
+  }
+  
+  form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .line {
+    margin-left: 1em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .line1, .line2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    margin-right: 0.5rem;
+    color: #555;
+  }
+  
+  input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  input[type="submit"], button {
+    background-color: #07598f;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45A049;
+  }
+  
+  .faltas, .criterio {
+    margin-bottom: 1.5rem;
+  }
+  
+  h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .caption {
+    margin-bottom: 0.5rem;
+    color: #777;
+  }
+
+    .name {
+    width: 60vw;
+  }
+  .adm_date {
+    width: 40vw;
+  }
+  .funcao {
+    width: 60vw;
+  }
+  .grupo {
+    width: 40vw;
+  }
+
+  .resp {
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .disponibilidade {
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .conhecimento {
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  .produtividade {
+    padding: 0.3rem 0.3rem 0.6rem 0.6rem;
+    border-radius: 10px;
+  }
+
+  nav p{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  *{
+    box-sizing: border-box;
+  }
+  
+  nav{
+    padding: 15px;
+    padding-inline: 25px;
+    width: 100%;
+    background-color: #ffffff;
+    height: 80px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+    margin-bottom: 3em;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+    background-color: #F8F9FA;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+  }
+  </style>
+</head>
+<body>
+    <nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+			<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<p>Utilizadores</p>
+				<p>Avaliacoes</p>
+			</div>
+		</div>
+	</nav>  	 
+<h1>Evaluation Form</h1>
+<div class="container">   
+<!-- <form> -->
+    <div class="inner_header">
+        <div class="line">
+            <div class="line1">
+                <h3 class="name">Nome: Jose Santos </h3>
+                <h3 class="adm_date">Data de Admissao: 15 de maio </h3>
+            </div>
+            <div class="line2">
+                <h3 class="funcao">Funcao: Administrador</h3>
+                <h3 class="grupo">Grupo: Operadores</h3>
+            </div>    
+        </div>
+    </div>
+    <div class="assiduidade">
+        <h5 caption="Avalia a presença efetiva no posto de trabalho e o respeito pelos horários estabelecidos." 
+        	onmouseover="this.title=this.getAttribute('caption')"> Assiduidade</h5>
+        <div class="faltas" style="padding-left:0.5em">
+            <h5 id="highlight-button" class="caption" caption="3 - zero faltas justificadas
+1 - Até dez faltas justificadas
+0 - onze ou mais faltas justificadas" 
+              onmouseover="this.title=this.getAttribute('caption')"> Faltas Justificadas</h5>
+            <label for="q1_0">0</label><input type="radio" id="q0_0" name="question1" value="zero">
+            <label for="q1_1">1</label><input type="radio" id="q0_1" name="question1" value="one">
+            <label for="q1_3">3</label><input type="radio" id="q0_3" name="question1" value="three">
+            <h5 class="caption" caption="3 - zero faltas justificadas
+1 - Até dez faltas justificadas
+0 - onze ou mais faltas justificadas"
+            onmouseover="this.title=this.getAttribute('caption')" > Faltas Injustificadas</h5>
+            <label for="q1_0">0</label><input type="radio" id="q1_0" name="question1" value="zero">
+            <label for="q1_1">1</label><input type="radio" id="q1_1" name="question1" value="one">
+            <label for="q1_3">3</label><input type="radio" id="q1_3" name="question1" value="three">
+        </div>
+    </div>
+    <hr>
+    <div class="resp">
+        <h5 class="criterio" caption="Observa sistematicamente os regulamentos e regras da Vicaima, nomeadamente no âmbito da higiene e segurança no trabalho, organização e limpeza; assim como revela capacidade de utilizar as ferramentas de que dispõe de forma a não haver desperdícios de material.
+        1 - Insatisfatório
+        2 - Mediano
+        3 - Excelente"
+        onmouseover="this.title=this.getAttribute('caption')">Responsabilidade e Disciplina</h5>
+
+        <label for="q1_1">1</label><input type="radio" id="q2_1" name="question2" value="one">
+        <label for="q1_2">2</label><input type="radio" id="q2_2" name="question2" value="two">
+        <label for="q1_3">3</label><input type="radio" id="q2_3" name="question2" value="three">
+    </div>
+    <hr>
+    <div class="disponibilidade">
+        <h5 caption="Demonstra disponibilidade para aceitar trabalho suplementar assim como iniciativa na resolução de problemas não previstos.
+            1 - Insatisfatório
+            2 - Mediano
+            3 - Excelente"
+            onmouseover="this.title=this.getAttribute('caption')"> Disponibilidade </h5>
+        <label for="q1_1">1</label><input type="radio" id="q3_1" name="question3" value="one">
+        <label for="q1_2">2</label><input type="radio" id="q3_2" name="question3" value="two">
+        <label for="q1_3">3</label><input type="radio" id="q3_3" name="question3" value="three">
+    </div>
+    <hr>
+    <div class="conhecimento">
+        <h5 caption="Capacidade para aplicar os conhecimentos e técnicas de trabalho essenciais para o desempenho das suas tarefas, assim como a preocupação de se manter atualizado e procurar oportunidades de desenvolvimento profissional.
+            1 - Insatisfatório
+            2 - Mediano
+            3 - Eficaz
+            4 - Muito Eficaz
+            " onmouseover="this.title=this.getAttribute('caption')">Conhecimento e Expertise </h5>
+        <label for="q4_1">1</label><input type="radio" id="q4_1" name="question4" value="one">
+        <label for="q4_2">2</label><input type="radio" id="q4_2" name="question4" value="two">
+        <label for="q4_3">3</label><input type="radio" id="q4_3" name="question4" value="three">
+        <label for="q4_4">4</label><input type="radio" id="q4_4" name="question4" value="four">
+    </div>
+	<hr>
+    <div class="produtividade">
+        <h5 caption="Apresenta volume e qualidade de trabalho num intervalo de tempo satisfatório.
+        1 - Insatisfatório
+        2 - Mediano
+        3 - Eficaz
+        4 - Muito Eficaz
+        " onmouseover="this.title=this.getAttribute('caption')">Produtividade </h5>
+        <label for="q5_1">1</label><input type="radio" id="q5_1" name="question5" value="one">
+        <label for="q5_2">2</label><input type="radio" id="q5_2" name="question5" value="two">
+        <label for="q5_3">3</label><input type="radio" id="q5_3" name="question5" value="three">
+        <label for="q5_4">4</label><input type="radio" id="q5_4" name="question5" value="four">
+    </div>
+    <hr>
+
+
+    <br>
+    
+    <h5 style="padding: 0.3rem 0.3rem 0.6rem 0.6rem;">Additional comments (optional):</h5>
+    <textarea name="comments" rows="5" cols="30"></textarea>
+    <br>
+    
+    <button onClick="myFunction()">Submit</button>
+    <!-- <input type="submit" value="Submit Evaluation" onsubmit=""> -->
+  <!-- </form> -->
+</div>
+</body>
+  <script>
+    const myFunction = () =>{
+      alert("Evaluation submitted!");
+      window.location.href="/dashboard_user_edit"
+    }
+  </script>
+</html>

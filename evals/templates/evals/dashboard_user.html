@@ -1,18 +1,33 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'evals/admin.css' %}"> -->
+    <style>
 		*{
 			box-sizing: border-box;
 		}
-		body{
-			margin: 0;
+		
+		nav p {
+			margin: 0 !important; /* Reset margin */
+			display: flex; /* Use flexbox layout */
+			align-items: center; /* Center items vertically */
+			justify-content: center; /* Center items horizontally */
+			height: 100%; /* Ensure the container has a height */
 		}
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F8F9FA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
 		nav{
 			padding: 15px;
 			padding-inline: 25px;
@@ -22,34 +37,115 @@
 			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
 		}
 
+        .container {
+			height: 40em;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1em;
+            background-color: #F8F9FA;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			overflow: scroll;
+        }
+
 		.wrapper{
-			padding:1em;
+			padding:3em;
 		}
 
-		.box{
-			align-items: center;
-			text-align: center;
-			padding:0.1em;
-			width: 10%;
-			background-color: #acacac;
-			border-radius: 0.3em;
-		}
-	</style>
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 100px; /* Adjust as needed */
+            height: auto;
+        }
+        .menu-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menu-buttons .btn {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
 	<nav>
 		<div style="height: 100%; display:flex; justify-content:space-between;">
 			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
 			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
-				<p>Utilizadores</p>
+				<p style="margin-bottom: 0;">Utilizadores</p>
 				<p>Avaliacoes</p>
 			</div>
 		</div>
 	</nav>
 	<div class="wrapper">
-		<h1>This is my dashboard for users</h1>
-		<div class="box">
-			<h4>Name</h4>
+		<h1>User Dashboard</h1>
+		<div class="container">
+			<div class="menu">
+				
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-body">
+							<h2 class="card-title">Event ID: {{ evento.id }}</h2>
+							<p class="card-text">Creation Date: {{ evento.creation_date }}</p>
+							<p class="card-text">Deadline: {{ evento.deadline }}</p>
+							<p class="card-text">Evaluatee ID: {{ evento.evaluator_id.id }}</p>
+							<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
+							<a href="/dashboard_user_edit">
+								<button class="btn btn-info w-100">Edit Event</button>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-body">
+							<h2 class="card-title">Event ID: {{ evento.id }}</h2>
+							<p class="card-text">Creation Date: {{ evento.creation_date }}</p>
+							<p class="card-text">Deadline: {{ evento.deadline }}</p>
+							<p class="card-text">Evaluatee ID: {{ evento.evaluator_id.id }}</p>
+							<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
+							<a href="/dashboard_user_edit">
+								<button class="btn btn-info w-100">Edit Event</button>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-body">
+							<h2 class="card-title">Event ID: {{ evento.id }}</h2>
+							<p class="card-text">Creation Date: {{ evento.creation_date }}</p>
+							<p class="card-text">Deadline: {{ evento.deadline }}</p>
+							<p class="card-text">Evaluator ID: {{ evento.evaluator_id.id }}</p>
+							<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
+							<a href="/dashboard_user_edit">
+								<button class="btn btn-info w-100">Edit Event</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
