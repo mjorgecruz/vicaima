@@ -90,3 +90,6 @@ def dashboard_add_event(request):
         eval_form = NewAvaliadosForm()
 
     return render(request, "evals/dashboard_add_new_eval.html", {'neweventform': event_form, 'newavaliadosform': eval_form})
+
+def eval_view(request):
+    return render(request, "evals/eval_form.html")

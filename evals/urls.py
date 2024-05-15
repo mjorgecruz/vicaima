@@ -11,6 +11,7 @@ urlpatterns = [
 	path('dashboard_add_collaborator', views.dashboard_add_collaborator, name='dashboard_add_collaborator'),
 	path('dashboard_users_list', views.dashboard_users_list, name='dashboard_users_list'),
 	path('dashboard_add_new_eval', views.dashboard_add_event, name='dashboard_add_new_eval'),
+	path('dashboard_add_edit_eval', views.eval_view, name='dashboard_add_new_eval'),
 
 	path('', include('django.contrib.auth.urls'))
 ]
