@@ -89,7 +89,7 @@ def import_view(request):
                     )
                     User.objects.create_user(  # Create a User instance
                         username=nickname,
-                        password="12345",
+                        password="admin12345",
                         first_name=row['Nome'],
                         last_name=row['Apelido'],
             )
