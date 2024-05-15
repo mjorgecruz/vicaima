@@ -20,6 +20,15 @@ h1 {
 	margin-bottom: 20px;
 }
 
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    text-decoration: none;
+}
+
 #buttons {
 	display: flex;
 	justify-content: center;
