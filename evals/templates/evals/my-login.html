@@ -1,24 +1,3 @@
-<html>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>My Login</title>
-	<style>
-		/* Add your CSS styles here */
-	</style>
-</head>
-<body>
-	<h1>my_login</h1>
-	<form method="POST" autocomplete="off">
-		{% csrf_token %}
-		{{ loginform.as_p }}
-
-		<input type="submit" value="Login"/>
-	</form>
-</body>
-</html>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
