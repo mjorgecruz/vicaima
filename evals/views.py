@@ -3,6 +3,8 @@ from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAval
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from .models import Colaboradores, Eventos, Avaliados, Resultados
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 
 def homepage(request):
@@ -103,6 +105,8 @@ def delete_event(request, event_id):
 
 @require_POST
 def delete_collaborator(request, collaborator_id):
-    event = get_object_or_404(Colaboradores, id=collaborator_id)  # Get the event or return 404 if not found
-    event.delete()  # Delete the event
-    return redirect('dashboard_users_list')  # Redirect to the admin dashboard
+    collaborator = get_object_or_404(Colaboradores, id=collaborator_id)  # Get the collaborator or return 404 if not found
+    user = get_object_or_404(User, username=collaborator.nickname)  # Get the User instance with the same username
+    collaborator.delete()  # Delete the collaborator
+    user.delete()  # Delete the User instance
+    return redirect('dashboard_users_list')

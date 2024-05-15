@@ -8,6 +8,7 @@ class Colaboradores(models.Model):
 	function = models.CharField(max_length=100)
 	admission_date = models.DateField()
 	functional_group = models.CharField(max_length=100)
+	password = models.CharField(max_length=100)
 	def __str__(self):
 		return self.name
 	
