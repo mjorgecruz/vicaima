@@ -16,7 +16,7 @@ class CreateUserForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     class Meta:
         model = User
-        username = forms.CharField(widget=TextInput())
+        username = forms.CharField(widget=TextInput)
         password = forms.CharField(widget=PasswordInput())
 
 #add new user
