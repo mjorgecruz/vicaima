@@ -1,6 +1,7 @@
 from django.db import models
 
 class Colaboradores(models.Model):
+	nickname = models.CharField(max_length=200)
 	name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	department = models.CharField(max_length=100)
@@ -17,18 +18,18 @@ class Colaboradores(models.Model):
 
 class Eventos(models.Model):
 	creation_date = models.DateField()
+	deadline = models.DateField()
 	evaluator_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
 	evaluation_status = models.BooleanField(default=False)
-class Resultados(models.Model):
-	result = models.IntegerField()
-	classification = models.CharField(max_length=1)
-
+	
 class Avaliados(models.Model):
 	evaluation_id = models.ForeignKey(Eventos, on_delete=models.CASCADE)
 	evaluated_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
-	results_id = models.ForeignKey(Resultados, on_delete=models.CASCADE)
-	comments = models.CharField(max_length=1000)
 
+class Resultados(models.Model):
+	result_id = models.ForeignKey(Avaliados, on_delete=models.CASCADE)
+	result = models.IntegerField(default=0)
+	classification = models.CharField(max_length=1, default='D')
 
 class Form(models.Model):
 	form = models.CharField(max_length=100)

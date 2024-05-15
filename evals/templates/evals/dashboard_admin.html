@@ -1,13 +1,14 @@
 <html>
 
 	<h1>This is my dashboard for the admin</h1>
-	
-	#check list of users
-	
-	# add collaborator
 
-	# create new evaluation
-
-	# view evaluations
-
+	{% for evento in eventos %}
+    <div class="box">
+        <h2 href="">Event ID: {{ evento.id }}</h2>
+        <p>Creation Date: {{ evento.creation_date }}</p>
+        <p>Deadline: {{ evento.deadline }}</p>
+        <p>Evaluator ID: {{ evento.evaluator_id.id }}</p>
+        <p>Evaluation Status: {{ evento.evaluation_status }}</p>
+    </div>
+	{% endfor %}
 </html>
