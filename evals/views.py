@@ -91,3 +91,12 @@ def dashboard_add_event(request):
         event_form = NewEventForm()
         eval_form = NewAvaliadosForm()
     return render(request, 'evals/dashboard_add_new_eval.html', {'event_form': event_form, 'eval_form': eval_form})
+
+from django.shortcuts import get_object_or_404, redirect
+from django.views.decorators.http import require_POST
+
+@require_POST
+def delete_event(request, event_id):
+    event = get_object_or_404(Eventos, id=event_id)  # Get the event or return 404 if not found
+    event.delete()  # Delete the event
+    return redirect('dashboard_admin')  # Redirect to the admin dashboard

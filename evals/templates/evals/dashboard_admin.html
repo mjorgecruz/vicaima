@@ -16,6 +16,10 @@
 			<p>Deadline: {{ evento.deadline }}</p>
 			<p>Evaluator ID: {{ evento.evaluator_id.id }}</p>
 			<p>Evaluation Status: {{ evento.evaluation_status }}</p>
+			<form method="post" action="{% url 'delete_event' evento.id %}">
+				{% csrf_token %}
+				<input type="submit" value="Delete Event">
+			</form>
 		</div>
 		{% endfor %}
 		</div>
