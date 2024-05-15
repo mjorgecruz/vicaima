@@ -1,6 +1,9 @@
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput
 from django.forms import ModelForm
+from django import forms
+from .models import Colaboradores
+from .models import Login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Colaboradores, Login, Eventos, Avaliados, Resultados
@@ -59,3 +62,6 @@ class NewResultadosForm(forms.ModelForm):
         model = Resultados
         fields = ['result_id']
 
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()

@@ -1,32 +1,126 @@
-<html>
+{% load static %}
 
-	<h1>This is my dashboard for the admin</h1>
-	
-	
-	#check list of users
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Last Name</th>
-		</tr>
-		{% for collaborator in collaborators %}
-		<tr>
-			<td>{{ collaborator.id }}</td>
-			<td>{{ collaborator.nickname }}</td>
-			<td>{{ collaborator.name }}</td>
-			<td>{{ collaborator.last_name }}</td>
-			<td>{{ collaborator.department}}</td>
-			<td>{{ collaborator.function}}</td>
-			<td>{{ collaborator.functional_group}}</td>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			height: 100vh;
+			margin: 0;
+		}
+		nav{
+			padding: 15px;
+			padding-inline: 25px;
+			width: 100%;
+			background-color: #ffffff;
+			height: 80px;
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+		}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F8F9FA;
+			/* background: url("{% static 'evals/imgs/marmore_White-Carrara.jpg' %}");
+			backdrop-filter: blur(3px); */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+			height: 40em;
+			overflow: scroll;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F8F9FA;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #F2F2F2;
+        }
+        tr:hover {
+            background-color: #F5F5F5;
+        }
+        .btn-back {
+            display: block;
+            width: 100%;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #0056B3;
+        }
+    </style>
+</head>
+<body>
+	<nav style="margin-bottom:3em">
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<p>Utilizadores</p>
+				<p>Avaliacoes</p>
+			</div>
+		</div>
+	</nav>
+    <h1>This is my dashboard for the admin</h1>
+    <div class="container">
+		<!-- check list of users -->
+        <table>
+			<tr>
+				<th>ID</th>
+                <th>Name</th>
+                <th>Last Name</th>
+                <th>Department</th>
+                <th>Function</th>
+                <th>Functional Group</th>
+                <th></th>
+            </tr>
+            {% for collaborator in collaborators %}
+            <tr>
+				<td>{{ collaborator.id }}</td>
+                <td>{{ collaborator.name }}</td>
+                <td>{{ collaborator.last_name }}</td>
+                <td>{{ collaborator.department }}</td>
+                <td>{{ collaborator.function }}</td>
+                <td>{{ collaborator.functional_group }}</td>
+                <td><button class="btn-back">Add collaborator</button></td>
 			<td>  <!-- New table cell for delete button -->
             <form method="post" action="{% url 'delete_collaborator' collaborator.id %}">
                     {% csrf_token %}
                     <input type="submit" value="Delete">
                 </form>
             </td>
-		</tr>
-		{% endfor %}
-	</table>
-
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+	<a href="http://127.0.0.1:8000/dashboard_admin" class="btn-back" style="width: 15%;margin-inline: auto;">Create User</a>
+</body>
 </html>
