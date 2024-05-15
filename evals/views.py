@@ -11,6 +11,7 @@ from tablib import Dataset
 import csv
 import pandas as pd
 from datetime import datetime
+from django.db import connection, transaction
 
 from .forms import CreateUserForm, LoginForm, NewUserForm
 from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAvaliadosForm
@@ -54,54 +55,47 @@ def my_login(request):
     context = {'loginform':form}
     return render(request, "evals/my-login.html", context=context)
 
+import sqlite3
+import pandas as pd
+
+import chardet
+from io import StringIO
+
 def import_view(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            csv_file = request.FILES['file']
-
+            csv_file = request.FILES['file']            
             if not csv_file.name.endswith('.csv'):
                 messages.error(request, 'Please upload a valid CSV file.')
                 return render(request, 'something')
-            
-            try:
-                decoded_data = csv_file.read().decode('utf-8')
-                print(decoded_data)
-
-                dataset = Dataset()
-                dataset.csv = decoded_data
-                imported_data = dataset.dict
-                
-                for data in imported_data:
-                    try:
-                        # Parsing admission date with a fallback for empty or invalid date strings
-                        admission_date_str = data.get('Data de admissao', '')
-                        admission_date = datetime.now().date()
-                        if admission_date_str:
-                            admission_date = datetime.strptime(admission_date_str, '%d/%m/%Y').date()
-                    except ValueError:
-                        messages.error(request, f'Invalid date format: {admission_date_str}')
-                        continue  # Skip this row if the date format is invalid
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM sqlite_sequence WHERE name = '" + Colaboradores._meta.db_table + "'")
+                cursor.execute("DELETE FROM sqlite_sequence WHERE name = '" + User._meta.db_table + "'")  # Reset User ID sequence
+                transaction.commit()
+                file_data = csv_file.read().decode('utf-8')  # Read the file data and decode it as UTF-8
+                reader = csv.DictReader(StringIO(file_data))
+                for row in reader:
+                    nickname = row['Nome'] + " " + row['Apelido']
                     Colaboradores.objects.create(
-                        colaborador_id = data.get('N colaborador', ''),
-                        name = data.get('Nome', ''),
-                        last_name = data.get('Apelido', '6'),
-                        department = data.get('Departamento', '1'),
-                        function = data.get('Funcao', '2'),
-                        admission_date = admission_date,
-                        functional_group = data.get('Grupo Funcional', '')
+                        nickname=nickname,
+                        name=row['Nome'],
+                        last_name=row['Apelido'],
+                        department=row['Departamento'],
+                        function=row['Funcao'],
+                        admission_date=datetime.strptime(row['Data de Admissao'], '%d/%m/%Y').date(),
+                        functional_group=row['Grupo Funcional:'],
+                        password=" "
                     )
-                print()
-                messages.success(request, 'User created with success')
-            except UnicodeDecodeError:
-                    messages.error(request, 'Failed to decode the file. Please ensure it is encoded in UTF-8 or ISO-8859-1.')
-                    return render(request, "pages/import/import.html", {'form': form})
-
-            return render(request, 'evals/index.html')
-
-    else:
-        form = UploadFileForm()
-    return render(request, "pages/import/import.html", {'form': form})
+                    User.objects.create_user(  # Create a User instance
+                        username=nickname,
+                        password="12345",
+                        first_name=row['Nome'],
+                        last_name=row['Apelido'],
+            )
+                
+    form = UploadFileForm()
+    return render(request, "evals/import.html", {'form': form})
 
 def dashboard_admin(request):
     eventos = Eventos.objects.all()
@@ -173,5 +167,6 @@ def delete_collaborator(request, collaborator_id):
     collaborator.delete()  # Delete the collaborator
     user.delete()  # Delete the User instance
     return redirect('dashboard_users_list')
+
 def eval_view(request):
     return render(request, "evals/eval_form.html")

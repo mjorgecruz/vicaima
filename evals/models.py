@@ -22,11 +22,15 @@ class Eventos(models.Model):
 	deadline = models.DateField()
 	evaluator_id = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
 	evaluation_status = models.BooleanField(default=False)
+	def __str__(self):
+		return self.name
 	
 class Avaliados(models.Model):
 	id = models.AutoField(primary_key=True)
 	evaluation_id = models.ForeignKey(Eventos, on_delete=models.CASCADE)
 	evaluated_id = models.ManyToManyField(Colaboradores)
+	def __str__(self):
+		return self.name
 
 class Resultados(models.Model):
 	result_id = models.ForeignKey(Avaliados, on_delete=models.CASCADE)

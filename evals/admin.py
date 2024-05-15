@@ -10,3 +10,8 @@ urlpatterns = [
 # Register your models here.
 admin.site.register(Login)
 admin.site.register(Colaboradores)
+admin.site.register(Eventos)
+admin.site.register(Avaliados)
+admin.site.register(Resultados)
+admin.site.register(Form)
+admin.site.register(Questions)
