@@ -45,12 +45,13 @@ class NewEventForm(forms.ModelForm):
         self.fields['evaluator_id'].label_from_instance = lambda obj: f"{obj.nickname}"
 
 class NewAvaliadosForm(forms.ModelForm):
-    evaluation_id = forms.ModelChoiceField(queryset=Eventos.objects.all(), empty_label="Select an event")
-    evaluated_id = forms.ModelMultipleChoiceField(queryset=Colaboradores.objects.all())
-    # results_id = forms.ModelChoiceField(queryset=Resultados.objects.all(), empty_label="Select a result")
+    evaluated_id = forms.ModelMultipleChoiceField(queryset=Colaboradores.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
     class Meta:
         model = Avaliados
-        fields = ['evaluation_id', 'evaluated_id']
+        fields = ['evaluated_id']
+    def __init__(self, *args, **kwargs):
+        super(NewAvaliadosForm, self).__init__(*args, **kwargs)
+        self.fields['evaluated_id'].label_from_instance = lambda obj: f"{obj.nickname}"
 
 class NewResultadosForm(forms.ModelForm):
     result_id = forms.ModelChoiceField(queryset=Avaliados.objects.all(), empty_label="Select an evaluation")

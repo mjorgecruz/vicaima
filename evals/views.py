@@ -75,18 +75,19 @@ def dashboard_add_event(request):
 
 def dashboard_add_event(request):
     if request.method == 'POST':
-        eval_form = NewAvaliadosForm
         event_form = NewEventForm(request.POST)
         if event_form.is_valid():
             event = event_form.save()  # Save the event form and get the instance
-            eval_form = (request.POST)
+            eval_form = NewAvaliadosForm(request.POST)  # Initialize the form with POST data
             if eval_form.is_valid():
                 eval = eval_form.save(commit=False)  # Don't save the form to the database yet
-                eval.event = event  # Assign the event id to the eval form
+                eval.evaluation_id = event  # Assign the event id to the eval form
                 eval.save()  # Now save the form to the database
+                evaluated_ids = request.POST.getlist('evaluated_id')  # Get list of evaluated_ids
+                for evaluated_id in evaluated_ids:
+                    eval.evaluated_id.add(evaluated_id) 
                 return redirect('dashboard_admin')
     else:
         event_form = NewEventForm()
         eval_form = NewAvaliadosForm()
-
-    return render(request, "evals/dashboard_add_new_eval.html", {'neweventform': event_form, 'newavaliadosform': eval_form})
+    return render(request, 'evals/dashboard_add_new_eval.html', {'event_form': event_form, 'eval_form': eval_form})

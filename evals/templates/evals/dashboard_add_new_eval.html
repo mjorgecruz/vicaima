@@ -5,12 +5,8 @@
 	# create new evaluation
 	<form method="post">
 		{% csrf_token %}
-		{{ neweventform.as_p }}
-		<button type="submit">Add entry</button>
-	</form>
-	<form method="post">
-		{{newavaliadosform.as_p}}
-		{% csrf_token %}
+		{{ event_form.as_p }}
+		{{ eval_form.as_p}}
 		<button type="submit">Add entry</button>
 	</form>
 	# view evaluations
