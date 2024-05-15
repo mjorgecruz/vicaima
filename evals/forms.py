@@ -60,3 +60,7 @@ class NewResultadosForm(forms.ModelForm):
     class Meta:
         model = Resultados
         fields = ['result_id']
+
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()

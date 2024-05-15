@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import NewLogin, UploadFileForm
+from .forms import UploadFileForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist

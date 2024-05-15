@@ -1,5 +1,38 @@
-<html>
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0;
+		}
+		nav{
+			padding: 15px;
+			padding-inline: 25px;
+			width: 100%;
+			background-color: #ffffff;
+			height: 80px;
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<p>Utilizadores</p>
+				<p>Avaliacoes</p>
+			</div>
+		</div>
+	</nav>
 	<h1>my_login</h1>
 	<form method="POST" autocomplete="off">
 		{% csrf_token %}
@@ -7,5 +40,5 @@
 
 		<input type="submit" value="Login"/>
 	</form>
-
+</body>
 </html>

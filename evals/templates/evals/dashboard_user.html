@@ -1,6 +1,56 @@
-<html>
+{% load static %}
 
-	<h1>This is my dashboard for users</h1>
-	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0;
+		}
+		nav{
+			padding: 15px;
+			padding-inline: 25px;
+			width: 100%;
+			background-color: #ffffff;
+			height: 80px;
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+		}
 
+		.wrapper{
+			padding:1em;
+		}
+
+		.box{
+			align-items: center;
+			text-align: center;
+			padding:0.1em;
+			width: 10%;
+			background-color: #acacac;
+			border-radius: 0.3em;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<p>Utilizadores</p>
+				<p>Avaliacoes</p>
+			</div>
+		</div>
+	</nav>
+	<div class="wrapper">
+		<h1>This is my dashboard for users</h1>
+		<div class="box">
+			<h4>Name</h4>
+		</div>
+	</div>
+</body>
 </html>
