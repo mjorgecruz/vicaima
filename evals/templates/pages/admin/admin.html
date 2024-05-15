@@ -1,13 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin Page</title>
-	<link rel="stylesheet" href="admin.css">
+	<link rel="stylesheet" href="{% static 'admin.css' %}">
 </head>
 <body>
 	<h1>Admin Dashboard</h1>
 	
-	<div id="dashboard">
+	{% block dashboard}
 		<!-- Add your dashboard content here -->
 	</div>
 	

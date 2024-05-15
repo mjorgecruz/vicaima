@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>Admin Page</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'evals/admin.css' %}">
+</head>
 </head>
 <body>
 	<h1>Admin Dashboard</h1>
-	
-	<div id="dashboard">
+		<div class="dashboard">
 		{% for evento in eventos %}
 		<div class="box">
 			<h2 href="">Event ID: {{ evento.id }}</h2>
@@ -18,8 +18,7 @@
 			<p>Evaluation Status: {{ evento.evaluation_status }}</p>
 		</div>
 		{% endfor %}
-	</div>
-	
+		</div>
 	<div id="buttons">
 		<button>Create Event</button>
 		<button>Delete Event</button>
