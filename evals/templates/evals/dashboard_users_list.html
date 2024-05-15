@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
 		*{
 			box-sizing: border-box;
@@ -14,6 +15,15 @@
 			height: 100vh;
 			margin: 0;
 		}
+        
+        nav p {
+			margin: 0 !important; /* Reset margin */
+			display: flex; /* Use flexbox layout */
+			align-items: center; /* Center items vertically */
+			justify-content: center; /* Center items horizontally */
+			height: 100%; /* Ensure the container has a height */
+		}
+
 		nav{
 			padding: 15px;
 			padding-inline: 25px;
@@ -43,6 +53,7 @@
         }
         h1 {
             text-align: center;
+            margin-bottom: 30px;
         }
         table {
             width: 100%;
@@ -77,50 +88,75 @@
         .btn-back:hover {
             background-color: #0056B3;
         }
+
+        a, a:hover, a:visited, a:active{
+			text-decoration: none;
+			color: black;
+		}
+        .wrapper{
+			padding:3em;
+		}
+        .menu-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menu-buttons .btn {
+            margin-left: 10px;
+        }
+
     </style>
 </head>
 <body>
-	<nav style="margin-bottom:3em">
+	<nav>
 		<div style="height: 100%; display:flex; justify-content:space-between;">
-			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
-			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
-				<p>Utilizadores</p>
-				<p>Avaliacoes</p>
+                <a href="http://127.0.0.1:8000/dashboard_admin">
+				<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+                </a>			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<a href="http://127.0.0.1:8000/dashboard_users_list">
+				<p style="margin-bottom: 0;">Collaborators</p>
+				</a>
+				<p>Evaluations</p>
 			</div>
 		</div>
 	</nav>
-    <h1>This is my dashboard for the admin</h1>
-    <div class="container">
-		<!-- check list of users -->
-        <table>
-			<tr>
-				<th>ID</th>
-                <th>Name</th>
-                <th>Last Name</th>
-                <th>Department</th>
-                <th>Function</th>
-                <th>Functional Group</th>
-                <th></th>
-            </tr>
-            {% for collaborator in collaborators %}
-            <tr>
-				<td>{{ collaborator.id }}</td>
-                <td>{{ collaborator.name }}</td>
-                <td>{{ collaborator.last_name }}</td>
-                <td>{{ collaborator.department }}</td>
-                <td>{{ collaborator.function }}</td>
-                <td>{{ collaborator.functional_group }}</td>
-                <td><button class="btn-back">Add collaborator</button></td>
-			<td>  <!-- New table cell for delete button -->
-            <form method="post" action="{% url 'delete_collaborator' collaborator.id %}">
-                    {% csrf_token %}
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="wrapper">
+        <h1>Collaborators</h1>
+        <div class="container">
+            <!-- check list of users -->
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Department</th>
+                    <th>Function</th>
+                    <th>Functional Group</th>
+                    <th></th>
+                </tr>
+                {% for collaborator in collaborators %}
+                <tr>
+                    <td>{{ collaborator.id }}</td>
+                    <td>{{ collaborator.name }}</td>
+                    <td>{{ collaborator.last_name }}</td>
+                    <td>{{ collaborator.department }}</td>
+                    <td>{{ collaborator.function }}</td>
+                    <td>{{ collaborator.functional_group }}</td>
+                <td>  <!-- New table cell for delete button -->
+                <div class="menu-buttons justify-content-center mt-4">
+                <form method="post" action="{% url 'delete_collaborator' collaborator.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+                </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+		<div class="menu-buttons justify-content-center mt-4">
+        <a href="http://127.0.0.1:8000/dashboard_add_collaborator" class="btn btn-info">ADD COLLABORATOR</a>
+		</div>
     </div>
-	<a href="http://127.0.0.1:8000/dashboard_add_collaborator" class="btn-back" style="width: 15%;margin-inline: auto;">Create User</a>
 </body>
 </html>

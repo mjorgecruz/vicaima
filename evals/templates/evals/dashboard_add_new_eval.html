@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 
 	<h1>This is my dashboard for the admin</h1>
 
@@ -11,4 +11,181 @@
 	</form>
 	# view evaluations
 
+</html> -->
+
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+		*{
+			box-sizing: border-box;
+		}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+			height: 40em;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1em;
+            background-color: #F8F9FA;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			overflow: scroll;
+        }
+
+		.employees{
+			overflow: scroll;
+		}
+		
+        h1 {
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 100px; /* Adjust as needed */
+            height: auto;
+        }
+
+        .menu-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .menu-buttons .btn {
+            margin-left: 10px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        form p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+		nav{
+			padding: 15px;
+			padding-inline: 25px;
+			width: 100%;
+			background-color: #ffffff;
+			height: 80px;
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+		}
+
+		nav p {
+			margin: 0 !important; /* Reset margin */
+			display: flex; /* Use flexbox layout */
+			align-items: center; /* Center items vertically */
+			justify-content: center; /* Center items horizontally */
+			height: 100%; /* Ensure the container has a height */
+		}
+
+		select{
+			display: flexbox;
+			padding: 5px;
+			padding-inline: 10px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 10px;
+			width: 100%;
+			font-size: 14px;
+		}
+
+		.test{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: left;
+		}
+		.wrapper{
+			padding:3em;
+		}
+		a, a:hover, a:visited, a:active{
+			text-decoration: none;
+			color: black;
+		}
+    </style>
+</head>
+<body>
+	<nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+                <a href="http://127.0.0.1:8000/dashboard_admin">
+				<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+                </a>			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<a href="http://127.0.0.1:8000/dashboard_users_list">
+				<p style="margin-bottom: 0;">Collaborators</p>
+				</a>
+				<p>Evaluations</p>
+			</div>
+		</div>
+	</nav>
+    <div class="wrapper">
+		<h1>Event</h1>
+		<div class="container">
+			<div class="menu">
+			</div>
+			
+			<!-- create new evaluation -->
+			<form method="post">
+				<div class="test">
+					{% csrf_token %}
+					<div class="form-group">
+						<div class="row" >
+							<div class="col">
+								{{ event_form.as_p }}
+							</div>
+							<div class="col">
+								{{ eval_form.as_p}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- view evaluations -->
+			</div>
+			<div class="menu-buttons justify-content-center mt-4">
+				<button class="btn btn-info" type="submit">Add Entry</button>
+		</form>
+	</div>
+	</body>
 </html>

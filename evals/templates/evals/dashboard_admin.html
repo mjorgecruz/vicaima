@@ -54,8 +54,16 @@
 
         h1 {
             text-align: center;
+        }
+        h2 {
+            text-align: center;
             margin-bottom: 30px;
         }
+        .card-body p {
+			text-align: center;
+			text-decoration: underline;
+			margin-bottom: 1px; 
+		}
         .card {
             margin-bottom: 20px;
             border: none;
@@ -84,15 +92,36 @@
         .menu-buttons .btn {
             margin-left: 10px;
         }
+
+		.button {
+            margin-top: 30px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+		a, a:hover, a:visited, a:active{
+			text-decoration: none;
+			color: black;
+		}
+
     </style>
 </head>
 <body>
 	<nav>
 		<div style="height: 100%; display:flex; justify-content:space-between;">
-			<img src="{%static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
-			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
-				<p style="margin-bottom: 0;">Utilizadores</p>
-				<p>Avaliacoes</p>
+                <a href="http://127.0.0.1:8000/dashboard_admin">
+				<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+                </a>			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<a href="http://127.0.0.1:8000/dashboard_users_list">
+				<p style="margin-bottom: 0;">Collaborators</p>
+				</a>
+				<p>Evaluations</p>
 			</div>
 		</div>
 	</nav>
@@ -108,24 +137,27 @@
 					<div class="card mb-4 shadow-sm">
 						<div class="card-body">
 							<h2 class="card-title">Event ID: {{ evento.id }}</h2>
-							<p class="card-text">Creation Date: {{ evento.creation_date }}</p>
+							<p class="card-text ">Creation Date: {{ evento.creation_date }}</p>
 							<p class="card-text">Deadline: {{ evento.deadline }}</p>
 							<p class="card-text">Evaluator ID: {{ evento.evaluator_id.id }}</p>
 							<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
-							<form method="post" action="{% url 'delete_event' evento.id %}">
-								{% csrf_token %}
-								<input type="submit" value="Delete Event">
-							</form>
+							<div class="menu-buttons justify-content-center mt-4">
+								<input class="btn btn-info" type="submit" value="View Event">
+								<form method="post" action="{% url 'delete_event' evento.id %}">
+									{% csrf_token %}
+								<input class="btn btn-danger" type="submit" value="Delete Event">
+								</form>
+							</div>
 							
 						</div>
 					</div>
 				</div>
+				{% endfor %}
 			</div>
 		</div>
-		{% endfor %}
-	</div>
-	<div class="menu-buttons justify-content-center mt-4">
-		<a href="http://127.0.0.1:8000/dashboard_add_new_eval" class="btn btn-info">Create Event</a>
+		<div class="menu-buttons justify-content-center mt-4">
+			<a href="http://127.0.0.1:8000/dashboard_add_new_eval" class="btn btn-info">Create Event</a>
+		</div>
 	</div>
 </body>
 </html>
