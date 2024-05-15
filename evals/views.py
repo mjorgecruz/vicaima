@@ -1,22 +1,17 @@
-from django.shortcuts import render, redirect
 from .forms import UploadFileForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
-from django.contrib import messages
-from .forms import UploadFileForm
-from .models import Login, Colaboradores
-from tablib import Dataset
-import csv
-import pandas as pd
-from datetime import datetime
-
 from .forms import CreateUserForm, LoginForm, NewUserForm
 from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAvaliadosForm
-from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout
 from .models import Colaboradores, Eventos, Avaliados, Resultados
+
+from tablib import Dataset
+from datetime import datetime
+import csv
+import pandas as pd
 
 
 def homepage(request):
@@ -107,6 +102,12 @@ def dashboard_admin(request):
 
 def dashboard_user(request):
     return render(request, "evals/dashboard_user.html")
+
+def dashboard_user_edit(request):
+    return render(request, "evals/dashboard_user_edit.html")
+
+def dashboard_user_evaluate(request):
+    return render(request, "evals/dashboard_user_evaluate.html")
 
 def dashboard_add_collaborator(request):
     form = NewUserForm()
