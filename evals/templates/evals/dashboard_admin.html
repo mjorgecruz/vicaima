@@ -112,21 +112,20 @@
 							<p class="card-text">Deadline: {{ evento.deadline }}</p>
 							<p class="card-text">Evaluator ID: {{ evento.evaluator_id.id }}</p>
 							<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
-							<button class="btn btn-info w-100">Edit Event</button>
+							<form method="post" action="{% url 'delete_event' evento.id %}">
+								{% csrf_token %}
+								<input type="submit" value="Delete Event">
+							</form>
+							
 						</div>
 					</div>
 				</div>
-				{% endfor %}
 			</div>
-			<form method="post" action="{% url 'delete_event' evento.id %}">
-				{% csrf_token %}
-				<input type="submit" value="Delete Event">
-			</form>
 		</div>
-		<div class="menu-buttons justify-content-center mt-4">
-			<a href="http://127.0.0.1:8000/dashboard_add_new_eval" class="btn btn-info">Create Event</a>
-			<button class="btn btn-danger">Delete Event</button>
-		</div>
+		{% endfor %}
+	</div>
+	<div class="menu-buttons justify-content-center mt-4">
+		<a href="http://127.0.0.1:8000/dashboard_add_new_eval" class="btn btn-info">Create Event</a>
 	</div>
 </body>
 </html>
