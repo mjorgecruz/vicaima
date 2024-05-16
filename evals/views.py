@@ -82,7 +82,7 @@ def import_view(request):
                 reader = csv.DictReader(StringIO(file_data))
                 for row in reader:
                     nickname = row['Nome'] + " " + row['Apelido']
-                    colaborador = Colaboradores.objects.create(
+                    Colaboradores.objects.create(
                         nickname=nickname,
                         name=row['Nome'],
                         last_name=row['Apelido'],
@@ -90,22 +90,15 @@ def import_view(request):
                         function=row['Funcao'],
                         admission_date=datetime.strptime(row['Data de Admissao'], '%d/%m/%Y').date(),
                         functional_group=row['Grupo Funcional:'],
-                        password="admin12345"
+                        password='admin12345'
                     )
                     User.objects.create_user(  # Create a User instance
                         username=nickname,
-                        password=make_password("admin12345"),
+                        password=make_password('admin12345'),
                         first_name=row['Nome'],
                         last_name=row['Apelido'],
                     )
-                    Login.objects.create(  # Create a Login instance
-                        username=nickname,
-                        password=make_password("admin12345"),  # Hash the password before storing it
-                        permission=0,  # Set the permission level
-                        employee_id=colaborador  # Set the employee_id to the Colaboradores instance
-                    )
-
-                
+                            
     form = UploadFileForm()
     return render(request, "evals/import.html", {'form': form})
 
@@ -128,11 +121,11 @@ def dashboard_add_collaborator(request):
         form = NewUserForm(request.POST)
         if form.is_valid():
             colaborador = form.save()  # Save the form and get the Colaboradores instance
-            Login.objects.create(  # Create a Login instance
-                username=colaborador.nickname,
-                password=make_password(colaborador.password),  # Get the password from the form
-                permission=0,  # Set the permission level
-                employee_id=colaborador  # Set the employee_id to the Colaboradores instance
+            User.objects.create(# Create a Login instance
+                username=colaborador.nickname, 
+                password=make_password(colaborador.password),
+                first_name=colaborador.name,
+                last_name=colaborador.last_name,
             )
             return redirect('dashboard_admin')
     else:
@@ -197,8 +190,8 @@ def eval_view(request):
 
 @login_required
 def user_page(request, username):
-    login = get_object_or_404(Login, username=username)
-    if request.user.username != login.username:
+    user = get_object_or_404(User, username=username)
+    if request.user.username != user.username:
         return redirect('my-login')  # Redirect to the admin dashboard if the user is not the owner of the page
     # Render the user's page
-    return render(request, 'evals/user_page.html', {'login': login})
+    return render(request, 'evals/user_page.html', {'user': user})

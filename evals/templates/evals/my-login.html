@@ -5,11 +5,22 @@
     <title>my-login</title>
  
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">    
     <!-- <link href="login.css" rel="stylesheet"> -->
     <!--Stylesheet-->
     <style media="screen">
-      *,
+      *{
+			box-sizing: border-box;
+		}
+		
+		nav p {
+			margin: 0 !important; /* Reset margin */
+			display: flex; /* Use flexbox layout */
+			align-items: center; /* Center items vertically */
+			justify-content: center; /* Center items horizontally */
+			height: 100%; /* Ensure the container has a height */
+		}
+
 *:before,
 *:after{
     padding: 0;
@@ -138,6 +149,21 @@ input{
 
 </head>
 <body>
+    <nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+                <a href="http://127.0.0.1:8000/dashboard_admin">
+				<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+                </a>			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<a href="http://127.0.0.1:8000/dashboard_users_list">
+				<p style="margin-bottom: 0;">Collaborators</p>
+				</a>
+				<p>Evaluations</p>
+				<a href="http://127.0.0.1:8000/my-login">
+					<p style="margin-bottom: 0;">Log Out</p>
+					</a>
+			</div>
+		</div>
+	</nav>
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
