@@ -66,3 +66,12 @@ class NewResultadosForm(forms.ModelForm):
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
+
+class UserInfoForm(forms.ModelForm):
+    class Meta:
+        model = Colaboradores
+        fields = ['id','name', 'last_name', 'department', 'function', 'admission_date', 'functional_group', 'nickname', 'password']
+    def __init__(self, *args, **kwargs):
+        super(UserInfoForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['readonly'] = True

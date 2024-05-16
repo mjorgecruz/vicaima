@@ -103,6 +103,34 @@
 		<h1>User Dashboard</h1>
 		<div class="container">
 			<div class="menu">
+			</div>
+			<div class="row">
+				{% for evento in eventos %}
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						{% if evento.evaluator_id.id == user.id|add:"-1" %}
+							<div class="card-body">
+								<h2 class="card-title">Event ID: {{ evento.id }}</h2>
+								<p class="card-text ">Creation Date: {{ evento.creation_date }}</p>
+								<p class="card-text">Deadline: {{ evento.deadline }}</p>
+								<p class="card-text">Evaluator ID: {{ evento.evaluator_id.id }}</p>
+								<p class="card-text">Evaluation Status: {{ evento.evaluation_status }}</p>
+								<div class="menu-buttons justify-content-center mt-4">
+									<input class="btn btn-info" type="submit" value="View Event">
+									<form method="post" action="{% url 'delete_event' evento.id %}">
+										{% csrf_token %}
+									<input class="btn btn-danger" type="submit" value="Delete Event">
+									</form>
+								</div>	
+							</div>
+						{% endif %}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="container">
+			<div class="menu">
 				
 			</div>
 			<div class="row">

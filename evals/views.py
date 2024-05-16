@@ -13,7 +13,7 @@ import csv
 import pandas as pd
 from datetime import datetime
 from django.db import connection, transaction
-from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAvaliadosForm
+from .forms import CreateUserForm, LoginForm, NewUserForm, NewEventForm, NewAvaliadosForm, UserInfoForm
 from .models import Colaboradores, Eventos, Avaliados, Resultados
 from tablib import Dataset
 from datetime import datetime
@@ -82,7 +82,7 @@ def import_view(request):
                 reader = csv.DictReader(StringIO(file_data))
                 for row in reader:
                     nickname = row['Nome'] + " " + row['Apelido']
-                    Colaboradores.objects.create(
+                    col=Colaboradores.objects.create(
                         nickname=nickname,
                         name=row['Nome'],
                         last_name=row['Apelido'],
@@ -93,8 +93,8 @@ def import_view(request):
                         password='admin12345'
                     )
                     User.objects.create_user(  # Create a User instance
-                        username=nickname,
-                        password=make_password('admin12345'),
+                        username=col.nickname,
+                        password=make_password(col.password),
                         first_name=row['Nome'],
                         last_name=row['Apelido'],
                     )
@@ -107,7 +107,7 @@ def dashboard_admin(request):
     return render(request, "evals/dashboard_admin.html", {'eventos': eventos})
 
 def dashboard_user(request):
-    return render(request, "evals/dashboard_user.html")
+    return render(request, "evals/user_page.html")
 
 def dashboard_user_edit(request):
     return render(request, "evals/dashboard_user_edit.html")
@@ -193,5 +193,7 @@ def user_page(request, username):
     user = get_object_or_404(User, username=username)
     if request.user.username != user.username:
         return redirect('my-login')  # Redirect to the admin dashboard if the user is not the owner of the page
+    form = UserInfoForm(instance=user)
+    eventos = Eventos.objects.all()
     # Render the user's page
-    return render(request, 'evals/user_page.html', {'user': user})
+    return render(request, 'evals/user_page.html', {'user': user, 'eventos':eventos, 'form': form, 'user': request.user})
