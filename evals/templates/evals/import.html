@@ -1,19 +1,166 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<style>
+		*{
+			box-sizing: border-box;
+		}
+		
+		nav p {
+			margin: 0 !important; /* Reset margin */
+			display: flex; /* Use flexbox layout */
+			align-items: center; /* Center items vertically */
+			justify-content: center; /* Center items horizontally */
+			height: 100%; /* Ensure the container has a height */
+		}
 
-	</style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F8F9FA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+		nav{
+			padding: 15px;
+			padding-inline: 25px;
+			width: 100%;
+			background-color: #ffffff;
+			height: 80px;
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0.17), 3px 4px 8px 0px rgba(0, 0, 0, 0.16);
+		}
+
+        .container {
+			height: 40em;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1em;
+            /* background-color: #F8F9FA; */
+            border-radius: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+			overflow: scroll;
+        }
+
+		.wrapper{
+			padding:3em;
+		}
+
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card-body p {
+			text-align: center;
+			text-decoration: underline;
+			margin-bottom: 1px; 
+		}
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 100px; /* Adjust as needed */
+            height: auto;
+        }
+        .menu-buttons{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menu-buttons .btn {
+            margin-left: 10px;
+        }
+
+		.button {
+            margin-top: 30px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container form{
+            /* display: none; */
+            width: 50%;
+            margin-inline:auto;
+        }
+
+        .container label{
+            width: 100%;
+            text-align: center;
+            margin:auto;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            text-align: center;
+            margin: auto;
+        }
+
+		a, a:hover, a:visited, a:active{
+			text-decoration: none;
+			color: black;
+		}
+
+        form{
+            margin-top:3em;
+        }
+
+    </style>
 </head>
 <body>
-	<h2>Upload CSV File</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
+	<nav>
+		<div style="height: 100%; display:flex; justify-content:space-between;">
+                <a href="http://127.0.0.1:8000/dashboard_admin">
+				<img src="{% static 'evals/imgs/logo.png' %}" alt="dwd" height="100%">
+                </a>			<div style="display: flex; width: 20%; justify-content: space-around; font-weight: bold;">
+				<a href="http://127.0.0.1:8000/dashboard_users_list">
+				<p style="margin-bottom: 0;">Collaborators</p>
+				</a>
+				<p>Evaluations</p>
+				<a href="http://127.0.0.1:8000/my-login">
+					<p style="margin-bottom: 0;">Log Out</p>
+					</a>
+			</div>
+		</div>
+	</nav>
+	<div class="wrapper">
+		<h1>Upload CSV File</h1>
+		<div class="container">
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+			<div class="menu-buttons justify-content-center mt-4">
+				<button type="submit" class="btn btn-info">Upload</button>
+			</div>
+		</form>
+	</div>
+	</div>
 </body>
 </html>
