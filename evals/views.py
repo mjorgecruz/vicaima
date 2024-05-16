@@ -28,7 +28,7 @@ from .models import Login
 from django.contrib.auth.hashers import make_password
 
 def homepage(request):
-    return render(request, "evals/index.html")
+    return redirect('my-login')
 
 def register(request):
 
