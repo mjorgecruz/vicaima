@@ -2,8 +2,12 @@
 
 ## Description
 This project was developed during the **Vicaima × 42 Porto Hackathon** (May 2024) as part of a team tasked with creating a web platform for Vicaima. 
-The goal was to design and implement a platform to facilitate the performance evaluation process within the organization, improving its efficiency through better communication and data handling. 
+The goal was to design and implement a platform to facilitate the performance evaluation process within the organization, improving its efficiency through better communication and data handling. </br> </br>
+
+[Presentation](https://github.com/mjorgecruz/vicaima/blob/main/Vicaima%20Hackaton.pdf)
+</br></br>
 The platform supports three distinct roles: **Admin (HR)**, **Evaluator**, and **Evaluated**, each with its own set of features tailored to their responsibilities.
+
 
 ## Features
 - **Admin**:
